@@ -65,13 +65,23 @@ class RequestService {
   }
 
   Future<Request> createRequest(Request request) async {
-    final response = await _supabase
-        .from('requests')
-        .insert(request.toJson())
-        .select()
-        .single();
+    print('🔄 Inserting request into database...');
+    final requestData = request.toJson(forInsert: true);
+    print('📋 Request data: $requestData');
+    
+    try {
+      final response = await _supabase
+          .from('requests')
+          .insert(requestData)
+          .select()
+          .single();
 
-    return Request.fromJson(response);
+      print('✅ Database insert successful');
+      return Request.fromJson(response);
+    } catch (e) {
+      print('❌ Database insert failed: $e');
+      rethrow;
+    }
   }
 
   Future<Request> updateRequest(Request request) async {

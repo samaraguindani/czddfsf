@@ -51,13 +51,23 @@ class AuthService {
   }
 
   Future<app_user.User?> getUserProfile(String userId) async {
-    final response = await _supabase
-        .from('users')
-        .select()
-        .eq('id', userId)
-        .single();
+    try {
+      final response = await _supabase
+          .from('users')
+          .select()
+          .eq('id', userId)
+          .maybeSingle();
 
-    return app_user.User.fromJson(response);
+      if (response == null) {
+        print('⚠️ User profile not found in database for ID: $userId');
+        return null;
+      }
+
+      return app_user.User.fromJson(response);
+    } catch (e) {
+      print('❌ Error fetching user profile: $e');
+      rethrow;
+    }
   }
 
   Future<app_user.User> updateUserProfile(app_user.User user) async {

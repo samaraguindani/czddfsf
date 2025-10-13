@@ -55,9 +55,8 @@ class Request {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
+  Map<String, dynamic> toJson({bool forInsert = false}) {
+    final Map<String, dynamic> json = {
       'user_id': userId,
       'title': title,
       'description': description,
@@ -68,9 +67,19 @@ class Request {
       'contact': contact,
       'city': city,
       'state': state,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
     };
+
+    // Não incluir id, created_at e updated_at se for insert (deixar o banco gerar)
+    if (!forInsert || id.isNotEmpty) {
+      json['id'] = id;
+    }
+    
+    if (!forInsert) {
+      json['created_at'] = createdAt.toIso8601String();
+      json['updated_at'] = updatedAt.toIso8601String();
+    }
+
+    return json;
   }
 
   Request copyWith({

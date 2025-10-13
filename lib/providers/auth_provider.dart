@@ -20,9 +20,14 @@ class AuthProvider extends ChangeNotifier {
 
   void _initializeAuth() {
     _authService.authStateChanges.listen((data) async {
+      print('🔍 Auth state changed: ${data.event}');
+      print('🔍 Session user ID: ${data.session?.user?.id}');
+      
       if (data.session?.user != null) {
+        print('✅ User authenticated, loading profile...');
         await _loadUserProfile(data.session!.user.id);
       } else {
+        print('❌ No user session');
         _currentUser = null;
         notifyListeners();
       }
@@ -31,10 +36,21 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> _loadUserProfile(String userId) async {
     try {
+      print('📋 Loading user profile for: $userId');
       _currentUser = await _authService.getUserProfile(userId);
+      
+      if (_currentUser == null) {
+        print('⚠️ User profile not found - trigger may not have executed');
+        print('💡 User can still be authenticated, but profile needs to be created');
+        // Usuário autenticado mas sem perfil - pode ser tratado posteriormente
+      } else {
+        print('✅ User profile loaded: ${_currentUser?.fullName}');
+      }
+      
       notifyListeners();
     } catch (e) {
-      _errorMessage = 'Erro ao carregar perfil do usuário';
+      print('❌ Error loading user profile: $e');
+      _errorMessage = 'Erro ao carregar perfil do usuário: ${e.toString()}';
       notifyListeners();
     }
   }
@@ -75,6 +91,7 @@ class AuthProvider extends ChangeNotifier {
     required String email,
     required String password,
   }) async {
+    print('🚀 Starting sign in for: $email');
     _setLoading(true);
     _clearError();
 
@@ -84,14 +101,20 @@ class AuthProvider extends ChangeNotifier {
         password: password,
       );
 
+      print('🔍 Sign in response: ${response.user?.id}');
+      print('🔍 Session: ${response.session?.user?.id}');
+
       if (response.user != null) {
+        print('✅ Sign in successful');
         _setLoading(false);
         return true;
       } else {
+        print('❌ Sign in failed - no user');
         _setError('Credenciais inválidas');
         return false;
       }
     } catch (e) {
+      print('❌ Sign in error: $e');
       _setError('Erro ao fazer login: ${e.toString()}');
       return false;
     }

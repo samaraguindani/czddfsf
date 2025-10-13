@@ -67,16 +67,19 @@ class RequestProvider extends ChangeNotifier {
   }
 
   Future<bool> createRequest(Request request) async {
+    print('📝 Creating request: ${request.title}');
     _setLoading(true);
     _clearError();
 
     try {
       await _requestService.createRequest(request);
+      print('✅ Request created successfully');
       await loadMyRequests(request.userId);
       _setLoading(false);
       return true;
     } catch (e) {
-      _setError('Erro ao criar pedido');
+      print('❌ Error creating request: $e');
+      _setError('Erro ao criar pedido: ${e.toString()}');
       return false;
     }
   }

@@ -67,7 +67,10 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (context, authProvider, child) {
+        print('🔄 AuthWrapper rebuild - isLoading: ${authProvider.isLoading}, isAuthenticated: ${authProvider.isAuthenticated}');
+        
         if (authProvider.isLoading) {
+          print('⏳ Showing loading screen');
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
@@ -76,9 +79,11 @@ class AuthWrapper extends StatelessWidget {
         }
         
         if (authProvider.isAuthenticated) {
+          print('✅ User authenticated, showing HomeScreen');
           return const HomeScreen();
         }
         
+        print('❌ User not authenticated, showing LoginScreen');
         return const LoginScreen();
       },
     );

@@ -67,7 +67,7 @@ class ServiceService {
   Future<Service> createService(Service service) async {
     final response = await _supabase
         .from('services')
-        .insert(service.toJson())
+        .insert(service.toJson(forInsert: true))
         .select()
         .single();
 
