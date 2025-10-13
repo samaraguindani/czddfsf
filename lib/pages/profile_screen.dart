@@ -78,29 +78,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _findStateAndCity(String stateCode, String cityName) {
-    // Encontrar estado
-    final state = _states.firstWhere(
-      (s) => s.sigla == stateCode,
-      orElse: () => _states.first,
-    );
+    // Verificar se há estados carregados
+    if (_states.isEmpty) {
+      print('⚠️ States list is empty, cannot find state');
+      return;
+    }
     
-    if (state != null) {
+    // Encontrar estado
+    try {
+      final state = _states.firstWhere(
+        (s) => s.sigla == stateCode,
+      );
+      
       setState(() {
         _selectedState = state;
       });
+      
       _loadCities(state.sigla).then((_) {
         // Encontrar cidade
-        final city = _cities.firstWhere(
-          (c) => c.nome == cityName,
-          orElse: () => _cities.isNotEmpty ? _cities.first : City(id: 0, nome: '', stateId: 0),
-        );
+        if (_cities.isEmpty) {
+          print('⚠️ Cities list is empty, cannot find city');
+          return;
+        }
         
-        if (city.id != 0) {
+        try {
+          final city = _cities.firstWhere(
+            (c) => c.nome == cityName,
+          );
+          
           setState(() {
             _selectedCity = city;
           });
+        } catch (e) {
+          print('⚠️ City not found: $cityName');
         }
       });
+    } catch (e) {
+      print('⚠️ State not found: $stateCode');
     }
   }
 
