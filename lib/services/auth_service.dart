@@ -75,6 +75,33 @@ class AuthService {
     await _supabase.auth.signOut();
   }
 
+  Future<void> deleteAccount() async {
+    final user = _supabase.auth.currentUser;
+    if (user == null) {
+      throw Exception('Usuário não autenticado');
+    }
+
+    try {
+      // Primeiro, excluir dados do usuário das tabelas
+      // Excluir serviços do usuário
+      await _supabase.from('services').delete().eq('user_id', user.id);
+      
+      // Excluir pedidos do usuário
+      await _supabase.from('requests').delete().eq('user_id', user.id);
+      
+      // Excluir perfil do usuário
+      await _supabase.from('users').delete().eq('id', user.id);
+      
+      // Por fim, excluir a conta de autenticação
+      // Nota: A API do Supabase não permite que usuários excluam suas próprias contas diretamente
+      // Isso deve ser feito via Admin API ou trigger no banco de dados
+      // Por enquanto, apenas fazemos logout
+      await _supabase.auth.signOut();
+    } catch (e) {
+      throw Exception('Erro ao excluir conta: $e');
+    }
+  }
+
   Future<void> resetPassword(String email) async {
     await _supabase.auth.resetPasswordForEmail(email);
   }

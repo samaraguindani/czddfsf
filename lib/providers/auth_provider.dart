@@ -131,6 +131,20 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> deleteAccount() async {
+    _setLoading(true);
+    _clearError();
+    
+    try {
+      await _authService.deleteAccount();
+      _currentUser = null;
+      _setLoading(false);
+    } catch (e) {
+      _setError('Erro ao excluir conta: ${e.toString()}');
+      throw e;
+    }
+  }
+
   Future<void> resetPassword(String email) async {
     _setLoading(true);
     _clearError();
