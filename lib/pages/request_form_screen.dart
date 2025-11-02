@@ -60,18 +60,48 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
     super.dispose();
   }
 
-  void _populateForm() {
+  void _populateForm() async {
     final request = widget.request!;
     _titleController.text = request.title;
     _descriptionController.text = request.description;
     _urgencyController.text = request.urgency;
     _budgetController.text = request.budget?.toString() ?? '';
     _contactController.text = request.contact;
-    _cityController.text = request.city;
-    _stateController.text = request.state;
     _selectedCategory = request.category;
     _selectedPricingType = request.pricingType;
     _isVoluntary = request.isVoluntary;
+    
+    // Carregar estados
+    await _loadStates();
+    
+    // Encontrar e selecionar o estado
+    if (_states.isNotEmpty) {
+      final state = _states.firstWhere(
+        (s) => s.sigla == request.state,
+        orElse: () => _states.first,
+      );
+      
+      setState(() {
+        _selectedState = state;
+        _stateController.text = state.sigla;
+      });
+      
+      // Carregar cidades do estado
+      await _loadCities(state.sigla);
+      
+      // Encontrar e selecionar a cidade
+      if (_cities.isNotEmpty) {
+        final city = _cities.firstWhere(
+          (c) => c.nome == request.city,
+          orElse: () => _cities.first,
+        );
+        
+        setState(() {
+          _selectedCity = city;
+          _cityController.text = city.nome;
+        });
+      }
+    }
   }
 
   Future<void> _loadStates() async {
@@ -167,23 +197,29 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
               const SizedBox(height: 16),
               
               // Categoria
-              DropdownButtonFormField<ServiceCategory>(
-                value: _selectedCategory,
-                decoration: const InputDecoration(
-                  labelText: 'Categoria',
-                  border: OutlineInputBorder(),
+              InkWell(
+                onTap: () => _showCategoryPicker(context),
+                child: InputDecorator(
+                  decoration: const InputDecoration(
+                    labelText: 'Categoria',
+                    border: OutlineInputBorder(),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          _selectedCategory?.displayName ?? 'Selecione uma categoria',
+                          style: TextStyle(
+                            color: _selectedCategory == null ? Colors.grey : Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      const Icon(Icons.arrow_drop_down),
+                    ],
+                  ),
                 ),
-                items: ServiceCategory.values.map((category) {
-                  return DropdownMenuItem(
-                    value: category,
-                    child: Text(category.displayName),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedCategory = value!;
-                  });
-                },
               ),
               
               const SizedBox(height: 16),
@@ -300,7 +336,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
               
               // Estado
               DropdownButtonFormField<Estado>(
-                value: _selectedState,
+                value: _states.contains(_selectedState) ? _selectedState : null,
                 decoration: const InputDecoration(
                   labelText: 'Estado',
                   border: OutlineInputBorder(),
@@ -327,7 +363,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
               
               // Cidade
               DropdownButtonFormField<City>(
-                value: _selectedCity,
+                value: _cities.contains(_selectedCity) ? _selectedCity : null,
                 decoration: const InputDecoration(
                   labelText: 'Cidade',
                   border: OutlineInputBorder(),
@@ -374,6 +410,87 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showCategoryPicker(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            constraints: const BoxConstraints(maxHeight: 600),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF87a492),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(4),
+                      topRight: Radius.circular(4),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Selecione uma Categoria',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: ServiceCategory.categoriesByGroup.length,
+                    itemBuilder: (context, index) {
+                      final entry = ServiceCategory.categoriesByGroup.entries.elementAt(index);
+                      final groupName = entry.key;
+                      final categories = entry.value;
+                      
+                      return ExpansionTile(
+                        title: Text(
+                          groupName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Color(0xFF5a7a6a),
+                          ),
+                        ),
+                        children: categories.map((category) {
+                          return ListTile(
+                            title: Text(category.displayName),
+                            onTap: () {
+                              setState(() {
+                                _selectedCategory = category;
+                              });
+                              Navigator.of(context).pop();
+                            },
+                            trailing: _selectedCategory == category
+                                ? const Icon(Icons.check, color: Color(0xFF87a492))
+                                : null,
+                          );
+                        }).toList(),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
