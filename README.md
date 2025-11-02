@@ -206,9 +206,9 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👥 Autores
 
-João Felipe Oliveira Deconto
-Samara Lazzarotto Guindani
-Desenvolvido com ❤️ pela equipe UNIFAZ
+- João Felipe Oliveira Deconto
+- Samara Lazzarotto Guindani
+- Desenvolvido com ❤️ pela equipe UNIFAZ
 
 ---
 
