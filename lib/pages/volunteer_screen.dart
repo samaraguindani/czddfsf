@@ -82,7 +82,7 @@ class _VolunteerScreenState extends State<VolunteerScreen> with SingleTickerProv
             ),
             Tab(
               icon: Icon(FontAwesomeIcons.handHoldingHeart, size: 20),
-              text: 'Pedidos',
+              text: 'Demandas',
             ),
           ],
         ),
@@ -158,8 +158,8 @@ class _VolunteerScreenState extends State<VolunteerScreen> with SingleTickerProv
         if (volunteerRequests.isEmpty) {
           return _buildEmptyState(
             icon: FontAwesomeIcons.handHoldingHeart,
-            title: 'Nenhum pedido de voluntário',
-            subtitle: 'Ainda não há pedidos buscando voluntários',
+            title: 'Nenhuma demanda de voluntário',
+            subtitle: 'Ainda não há demandas buscando voluntários',
           );
         }
 

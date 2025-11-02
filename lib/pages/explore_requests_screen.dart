@@ -92,7 +92,7 @@ class _ExploreRequestsScreenState extends State<ExploreRequestsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Explorar Pedidos'),
+        title: const Text('Explorar Demandas'),
         backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -133,7 +133,7 @@ class _ExploreRequestsScreenState extends State<ExploreRequestsScreen> {
                 TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: 'Buscar pedidos...',
+                    hintText: 'Buscar demandas...',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: _searchController.text.isNotEmpty
                         ? IconButton(
@@ -292,7 +292,7 @@ class _ExploreRequestsScreenState extends State<ExploreRequestsScreen> {
             child: Consumer<RequestProvider>(
               builder: (context, requestProvider, child) {
                 if (requestProvider.isLoading) {
-                  return const LoadingWidget(message: 'Carregando pedidos...');
+                  return const LoadingWidget(message: 'Carregando demandas...');
                 }
                 
                 if (requestProvider.errorMessage != null) {
@@ -304,7 +304,7 @@ class _ExploreRequestsScreenState extends State<ExploreRequestsScreen> {
                 
                 if (_filteredRequests.isEmpty) {
                   return EmptyWidget(
-                    message: 'Nenhum pedido encontrado',
+                    message: 'Nenhuma demanda encontrada',
                     icon: FontAwesomeIcons.search,
                     action: ElevatedButton(
                       onPressed: () {

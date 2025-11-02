@@ -16,7 +16,7 @@ class RequestDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Detalhes do Pedido'),
+        title: const Text('Detalhes da Demanda'),
         backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,

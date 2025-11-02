@@ -148,7 +148,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: Text(widget.request == null ? 'Adicionar Pedido' : 'Editar Pedido'),
+        title: Text(widget.request == null ? 'Adicionar Demanda' : 'Editar Demanda'),
         backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -164,12 +164,12 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  labelText: 'Título do Pedido',
+                  labelText: 'Título da Demanda',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira o título do pedido';
+                    return 'Por favor, insira o título da demanda';
                   }
                   return null;
                 },
@@ -398,7 +398,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
                   child: _isLoading
                       ? const LoadingWidget()
                       : Text(
-                          widget.request == null ? 'Criar Pedido' : 'Atualizar Pedido',
+                          widget.request == null ? 'Criar Demanda' : 'Atualizar Demanda',
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -549,8 +549,8 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
             SnackBar(
               content: Text(
                 widget.request == null 
-                    ? 'Pedido criado com sucesso!' 
-                    : 'Pedido atualizado com sucesso!'
+                    ? 'Demanda criada com sucesso!' 
+                    : 'Demanda atualizada com sucesso!'
               ),
               backgroundColor: Colors.green,
             ),
@@ -559,7 +559,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(requestProvider.errorMessage ?? 'Erro ao salvar pedido'),
+              content: Text(requestProvider.errorMessage ?? 'Erro ao salvar demanda'),
               backgroundColor: Colors.red,
             ),
           );
@@ -569,7 +569,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Erro ao salvar pedido: $e'),
+            content: Text('Erro ao salvar demanda: $e'),
             backgroundColor: Colors.red,
           ),
         );

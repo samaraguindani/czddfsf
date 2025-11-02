@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.handshake),
-            label: 'Pedidos',
+            label: 'Demandas',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.work),
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.folder_open),
-            label: 'Meus Pedidos',
+            label: 'Minhas Demandas',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -304,7 +304,7 @@ class HomeContentScreen extends StatelessWidget {
                   ),
                   _buildQuickActionCard(
                     context,
-                    'Explorar Pedidos',
+                    'Explorar Demandas',
                     FontAwesomeIcons.handshake,
                     const Color(0xFF87a492),
                     () => _navigateToScreen(context, 2),
@@ -318,7 +318,7 @@ class HomeContentScreen extends StatelessWidget {
                   ),
                   _buildQuickActionCard(
                     context,
-                    'Meus Pedidos',
+                    'Minhas Demandas',
                     FontAwesomeIcons.folderOpen,
                     const Color(0xFF87a492),
                     () => _navigateToScreen(context, 4),
@@ -365,7 +365,7 @@ class HomeContentScreen extends StatelessWidget {
                     _buildStepItem(
                       '2',
                       'Ofereça ou Solicite',
-                      'Publique serviços ou pedidos',
+                      'Publique serviços ou demandas',
                       FontAwesomeIcons.handshake,
                     ),
                     const SizedBox(height: 12),
