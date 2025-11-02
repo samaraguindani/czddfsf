@@ -164,9 +164,10 @@ class HomeContentScreen extends StatelessWidget {
                                   const Text(
                                     'Unidos Fazemos',
                                     style: TextStyle(
+                                      fontFamily: 'Gliker',
                                       color: Colors.white,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.bold,
                                       letterSpacing: 0.5,
                                     ),
                                   ),
@@ -245,6 +246,7 @@ class HomeContentScreen extends StatelessWidget {
                             const Text(
                               'Trabalhos Voluntários',
                               style: TextStyle(
+                                fontFamily: 'Gliker',
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -278,6 +280,7 @@ class HomeContentScreen extends StatelessWidget {
               const Text(
                 'Navegação Rápida',
                 style: TextStyle(
+                  fontFamily: 'Gliker',
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
@@ -343,12 +346,13 @@ class HomeContentScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
+                  child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'Como funciona?',
                       style: TextStyle(
+                        fontFamily: 'Gliker',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
@@ -469,6 +473,7 @@ class HomeContentScreen extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
+                  fontFamily: 'Gliker',
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,

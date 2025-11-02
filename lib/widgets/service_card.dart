@@ -39,6 +39,7 @@ class ServiceCard extends StatelessWidget {
                     child: Text(
                       service.title,
                       style: const TextStyle(
+                        fontFamily: 'Gliker',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),

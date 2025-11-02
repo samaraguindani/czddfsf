@@ -39,6 +39,7 @@ class RequestCard extends StatelessWidget {
                     child: Text(
                       request.title,
                       style: const TextStyle(
+                        fontFamily: 'Gliker',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),

@@ -37,11 +37,64 @@ class UNIFAZApp extends StatelessWidget {
             brightness: Brightness.light,
           ),
           useMaterial3: true,
+          fontFamily: 'Garet',
+          textTheme: const TextTheme(
+            // Títulos - Gliker
+            titleLarge: TextStyle(
+              fontFamily: 'Gliker',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            headlineLarge: TextStyle(
+              fontFamily: 'Gliker',
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+            headlineMedium: TextStyle(
+              fontFamily: 'Gliker',
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
+            headlineSmall: TextStyle(
+              fontFamily: 'Gliker',
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+            titleMedium: TextStyle(
+              fontFamily: 'Gliker',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            titleSmall: TextStyle(
+              fontFamily: 'Gliker',
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+            // Textos normais - Garet Book
+            bodyLarge: TextStyle(
+              fontFamily: 'Garet',
+              fontSize: 16,
+            ),
+            bodyMedium: TextStyle(
+              fontFamily: 'Garet',
+              fontSize: 14,
+            ),
+            bodySmall: TextStyle(
+              fontFamily: 'Garet',
+              fontSize: 12,
+            ),
+          ),
           appBarTheme: const AppBarTheme(
             centerTitle: true,
             elevation: 0,
             backgroundColor: Color(0xFF87a492),
             foregroundColor: Colors.white,
+            titleTextStyle: TextStyle(
+              fontFamily: 'Gliker',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
