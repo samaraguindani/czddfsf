@@ -59,7 +59,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Perfil do Usuário'),
-        backgroundColor: Colors.indigo[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -73,7 +73,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       Icon(
                         Icons.error_outline,
                         size: 64,
-                        color: Colors.red[300],
+                        color: const Color(0xFFd68a7a),
                       ),
                       const SizedBox(height: 16),
                       Text(
@@ -90,7 +90,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         icon: const Icon(Icons.refresh),
                         label: const Text('Tentar Novamente'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo[600],
+                          backgroundColor: const Color(0xFF87a492),
                           foregroundColor: Colors.white,
                         ),
                       ),
@@ -138,7 +138,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                     width: 100,
                                     height: 100,
                                     decoration: BoxDecoration(
-                                      color: Colors.indigo[600],
+                                      color: const Color(0xFF87a492),
                                       borderRadius: BorderRadius.circular(50),
                                     ),
                                     child: const Icon(
@@ -274,7 +274,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                     icon: FontAwesomeIcons.phone,
                                     label: 'Telefone',
                                     value: _user!.phone,
-                                    color: Colors.green,
+                                    color: const Color(0xFF87a492),
                                   ),
                                   
                                   // Email
@@ -283,7 +283,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                     icon: Icons.email,
                                     label: 'Email',
                                     value: _user!.email,
-                                    color: Colors.blue,
+                                    color: const Color(0xFF87a492),
                                   ),
                                 ],
                               ),
@@ -321,7 +321,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                         Icon(
                                           FontAwesomeIcons.locationDot,
                                           size: 20,
-                                          color: Colors.red[600],
+                                          color: const Color(0xFFd4a687),
                                         ),
                                         const SizedBox(width: 12),
                                         Expanded(
