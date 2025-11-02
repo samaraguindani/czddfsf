@@ -90,38 +90,40 @@ class RequestDetailScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     
                     // Orçamento/Voluntário e Urgência
-                    if (request.isVoluntary)
-                      // Badge de Voluntário
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF87a492),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              FontAwesomeIcons.heart,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              'BUSCO VOLUNTÁRIOS',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                    Row(
+                      children: [
+                        if (request.isVoluntary)
+                          // Badge de Voluntário
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF87a492),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    FontAwesomeIcons.heart,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                  SizedBox(width: 12),
+                                  Text(
+                                    'BUSCO VOLUNTÁRIOS',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      )
-                    else
-                      // Orçamento e Urgência
-                      Row(
-                        children: [
+                          )
+                        else
+                          // Orçamento
                           Expanded(
                             child: Container(
                               padding: const EdgeInsets.all(12),
@@ -152,58 +154,26 @@ class RequestDetailScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 12),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: _getUrgencyColor(request.urgency).withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: _getUrgencyColor(request.urgency)),
-                            ),
-                            child: Text(
-                              request.urgency,
-                              style: TextStyle(
-                                color: _getUrgencyColor(request.urgency),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
+                        const SizedBox(width: 12),
+                        // Urgência
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: _getUrgencyColor(request.urgency).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: _getUrgencyColor(request.urgency)),
+                          ),
+                          child: Text(
+                            request.urgency,
+                            style: TextStyle(
+                              color: _getUrgencyColor(request.urgency),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
                             ),
                           ),
-                        ],
-                      ),
-                    
-                    // Urgência para pedidos voluntários
-                    if (request.isVoluntary) ...[
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: _getUrgencyColor(request.urgency).withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: _getUrgencyColor(request.urgency)),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Urgência: ',
-                              style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 14,
-                              ),
-                            ),
-                            Text(
-                              request.urgency,
-                              style: TextStyle(
-                                color: _getUrgencyColor(request.urgency),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ],
                 ),
               ),
