@@ -18,14 +18,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const HomeContentScreen(),
+  List<Widget> get _screens => [
+    HomeContentScreen(onNavigate: _navigateToTab),
     const ExploreServicesScreen(),
     const ExploreRequestsScreen(),
     const MyServicesScreen(),
     const MyRequestsScreen(),
     const ProfileScreen(),
   ];
+
+  void _navigateToTab(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeContentScreen extends StatelessWidget {
-  const HomeContentScreen({super.key});
+  final Function(int) onNavigate;
+  
+  const HomeContentScreen({
+    super.key,
+    required this.onNavigate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -388,13 +399,6 @@ class HomeContentScreen extends StatelessWidget {
   }
 
   void _navigateToScreen(BuildContext context, int index) {
-    // Esta função será chamada quando o usuário clicar nos cards de navegação rápida
-    // Por enquanto, apenas mostra um snackbar informativo
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Navegando para a tela $index'),
-        duration: const Duration(seconds: 1),
-      ),
-    );
+    onNavigate(index);
   }
 }
