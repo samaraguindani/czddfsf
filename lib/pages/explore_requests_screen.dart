@@ -287,6 +287,37 @@ class _ExploreRequestsScreenState extends State<ExploreRequestsScreen> {
             ),
           ),
           
+          // Aviso sobre golpes
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.orange[50],
+              border: Border(
+                bottom: BorderSide(color: Colors.orange[200]!, width: 1),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.warning_amber_rounded,
+                  size: 16,
+                  color: Colors.orange[700],
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '⚠️ Atenção: Nunca envie dinheiro antecipado. Verifique a reputação e encontre-se em locais seguros.',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.orange[900],
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
           // Lista de pedidos
           Expanded(
             child: Consumer<RequestProvider>(

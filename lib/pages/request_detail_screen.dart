@@ -40,7 +40,6 @@ class RequestDetailScreen extends StatelessWidget {
                     Text(
                       request.title,
                       style: const TextStyle(
-                        fontFamily: 'Gliker',
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
@@ -203,7 +202,6 @@ class RequestDetailScreen extends StatelessWidget {
                         const Text(
                           'Descrição',
                           style: TextStyle(
-                            fontFamily: 'Gliker',
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -252,7 +250,6 @@ class RequestDetailScreen extends StatelessWidget {
                         const Text(
                           'Tipo de Cobrança',
                           style: TextStyle(
-                            fontFamily: 'Gliker',
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -308,7 +305,6 @@ class RequestDetailScreen extends StatelessWidget {
                         const Text(
                           'Contato',
                           style: TextStyle(
-                            fontFamily: 'Gliker',
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,

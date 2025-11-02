@@ -77,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     'Unidos Fazemos',
                     style: TextStyle(
-                      fontFamily: 'Gliker',
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF87a492),

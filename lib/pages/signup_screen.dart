@@ -93,7 +93,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const Text(
                 'Criar Conta',
                 style: TextStyle(
-                  fontFamily: 'Gliker',
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF87a492),

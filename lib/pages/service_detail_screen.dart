@@ -40,7 +40,6 @@ class ServiceDetailScreen extends StatelessWidget {
                     Text(
                       service.title,
                       style: const TextStyle(
-                        fontFamily: 'Gliker',
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
@@ -183,7 +182,6 @@ class ServiceDetailScreen extends StatelessWidget {
                         const Text(
                           'Descrição',
                           style: TextStyle(
-                            fontFamily: 'Gliker',
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -232,7 +230,6 @@ class ServiceDetailScreen extends StatelessWidget {
                         const Text(
                           'Disponibilidade',
                           style: TextStyle(
-                            fontFamily: 'Gliker',
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -281,7 +278,6 @@ class ServiceDetailScreen extends StatelessWidget {
                         const Text(
                           'Contato',
                           style: TextStyle(
-                            fontFamily: 'Gliker',
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
