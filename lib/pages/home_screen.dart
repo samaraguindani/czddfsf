@@ -119,13 +119,32 @@ class HomeContentScreen extends StatelessWidget {
                               width: 60,
                               height: 60,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: const Icon(
-                                Icons.handshake,
                                 color: Colors.white,
-                                size: 30,
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(1),
+                                  child: Image.asset(
+                                    'assets/images/logo.png',
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Icon(
+                                        Icons.handshake,
+                                        color: Color(0xFF87a492),
+                                        size: 35,
+                                      );
+                                    },
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 16),
@@ -141,13 +160,14 @@ class HomeContentScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
+                                  const SizedBox(height: 8),
                                   const Text(
-                                    'UNIFAZ',
+                                    'Unidos Fazemos',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.5,
                                     ),
                                   ),
                                 ],
@@ -155,21 +175,15 @@ class HomeContentScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'Unidos Fazemos',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        const Text(
-                          'Conectando pessoas através de serviços',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
+                        const SizedBox(height: 8),
+                        const Center(
+                          child: Text(
+                            'Conecte. Colabore. Faça acontecer.',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ],
