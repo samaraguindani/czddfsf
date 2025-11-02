@@ -29,6 +29,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
 
   ServiceCategory _selectedCategory = ServiceCategory.outros;
   PricingType _selectedPricingType = PricingType.aCombinar;
+  bool _isVoluntary = false;
   
   List<Estado> _states = [];
   List<City> _cities = [];
@@ -70,6 +71,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
     _stateController.text = request.state;
     _selectedCategory = request.category;
     _selectedPricingType = request.pricingType;
+    _isVoluntary = request.isVoluntary;
   }
 
   Future<void> _loadStates() async {
@@ -243,6 +245,41 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
               
               const SizedBox(height: 16),
               
+              // Trabalho Voluntário
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xFF87a492)),
+                  borderRadius: BorderRadius.circular(8),
+                  color: _isVoluntary ? const Color(0xFF87a492).withOpacity(0.1) : Colors.transparent,
+                ),
+                child: CheckboxListTile(
+                  title: const Text(
+                    'Busco Voluntários',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    'Marque esta opção se você procura voluntários sem custo',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  value: _isVoluntary,
+                  activeColor: const Color(0xFF87a492),
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _isVoluntary = value ?? false;
+                      if (_isVoluntary) {
+                        _budgetController.clear();
+                      }
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
+                ),
+              ),
+              
+              const SizedBox(height: 16),
+              
               // Contato
               TextFormField(
                 controller: _contactController,
@@ -377,6 +414,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
         contact: _contactController.text.trim(),
         city: _selectedCity!.nome,
         state: _selectedState!.sigla,
+        isVoluntary: _isVoluntary,
         createdAt: widget.request?.createdAt ?? DateTime.now(),
         updatedAt: DateTime.now(),
       );

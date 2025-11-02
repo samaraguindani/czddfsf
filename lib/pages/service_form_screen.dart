@@ -29,6 +29,7 @@ class _ServiceFormScreenState extends State<ServiceFormScreen> {
 
   ServiceCategory _selectedCategory = ServiceCategory.outros;
   PricingType _selectedPricingType = PricingType.aCombinar;
+  bool _isVoluntary = false;
   
   List<Estado> _states = [];
   List<City> _cities = [];
@@ -70,6 +71,7 @@ class _ServiceFormScreenState extends State<ServiceFormScreen> {
     _stateController.text = service.state;
     _selectedCategory = service.category;
     _selectedPricingType = service.pricingType;
+    _isVoluntary = service.isVoluntary;
   }
 
   Future<void> _loadStates() async {
@@ -240,6 +242,41 @@ class _ServiceFormScreenState extends State<ServiceFormScreen> {
               
               const SizedBox(height: 16),
               
+              // Trabalho Voluntário
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xFF87a492)),
+                  borderRadius: BorderRadius.circular(8),
+                  color: _isVoluntary ? const Color(0xFF87a492).withOpacity(0.1) : Colors.transparent,
+                ),
+                child: CheckboxListTile(
+                  title: const Text(
+                    'Trabalho Voluntário',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    'Marque esta opção se o serviço for oferecido gratuitamente',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  value: _isVoluntary,
+                  activeColor: const Color(0xFF87a492),
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _isVoluntary = value ?? false;
+                      if (_isVoluntary) {
+                        _valueController.clear();
+                      }
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
+                ),
+              ),
+              
+              const SizedBox(height: 16),
+              
               // Contato
               TextFormField(
                 controller: _contactController,
@@ -374,6 +411,7 @@ class _ServiceFormScreenState extends State<ServiceFormScreen> {
         contact: _contactController.text.trim(),
         city: _selectedCity!.nome,
         state: _selectedState!.sigla,
+        isVoluntary: _isVoluntary,
         createdAt: widget.service?.createdAt ?? DateTime.now(),
         updatedAt: DateTime.now(),
       );

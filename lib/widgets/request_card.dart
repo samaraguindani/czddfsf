@@ -101,30 +101,60 @@ class RequestCard extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
+              if (request.isVoluntary) ...[
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF87a492),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
                       Icon(
-                        FontAwesomeIcons.dollarSign,
-                        size: 16,
-                        color: const Color(0xFFc9a56f),
+                        FontAwesomeIcons.heart,
+                        size: 14,
+                        color: Colors.white,
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 6),
                       Text(
-                        request.budget != null
-                            ? 'R\$ ${request.budget!.toStringAsFixed(2)}'
-                            : 'A Combinar',
-                        style: const TextStyle(
-                          color: Color(0xFFc9a56f),
+                        'BUSCO VOLUNTÁRIOS',
+                        style: TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                       ),
                     ],
                   ),
+                ),
+              ],
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (!request.isVoluntary)
+                    Row(
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.dollarSign,
+                          size: 16,
+                          color: const Color(0xFFc9a56f),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          request.budget != null
+                              ? 'R\$ ${request.budget!.toStringAsFixed(2)}'
+                              : 'A Combinar',
+                          style: const TextStyle(
+                            color: Color(0xFFc9a56f),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(

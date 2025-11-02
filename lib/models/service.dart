@@ -12,6 +12,7 @@ class Service {
   final String contact;
   final String city;
   final String state;
+  final bool isVoluntary;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -27,6 +28,7 @@ class Service {
     required this.contact,
     required this.city,
     required this.state,
+    this.isVoluntary = false,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -50,6 +52,7 @@ class Service {
       contact: json['contact'] as String,
       city: json['city'] as String,
       state: json['state'] as String,
+      isVoluntary: json['is_voluntary'] ?? false,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
     );
@@ -67,6 +70,7 @@ class Service {
       'contact': contact,
       'city': city,
       'state': state,
+      'is_voluntary': isVoluntary,
     };
 
     // Não incluir id, created_at e updated_at se for insert (deixar o banco gerar)
@@ -94,6 +98,7 @@ class Service {
     String? contact,
     String? city,
     String? state,
+    bool? isVoluntary,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -109,6 +114,7 @@ class Service {
       contact: contact ?? this.contact,
       city: city ?? this.city,
       state: state ?? this.state,
+      isVoluntary: isVoluntary ?? this.isVoluntary,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

@@ -89,43 +89,71 @@ class ServiceDetailScreen extends StatelessWidget {
                     
                     const SizedBox(height: 16),
                     
-                    // Valor
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFc9a56f).withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: const Color(0xFFc9a56f)),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.dollarSign,
-                            color: const Color(0xFFc9a56f),
-                            size: 20,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            service.value != null
-                                ? 'R\$ ${service.value!.toStringAsFixed(2)}'
-                                : 'A Combinar',
-                            style: const TextStyle(
-                              color: Color(0xFFc9a56f),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                    // Valor ou Voluntário
+                    if (service.isVoluntary)
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF87a492),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              FontAwesomeIcons.heart,
+                              color: Colors.white,
+                              size: 24,
                             ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            service.pricingType.displayName,
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 14,
+                            SizedBox(width: 12),
+                            Text(
+                              'TRABALHO VOLUNTÁRIO',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                      )
+                    else
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFc9a56f).withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: const Color(0xFFc9a56f)),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.dollarSign,
+                              color: const Color(0xFFc9a56f),
+                              size: 20,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              service.value != null
+                                  ? 'R\$ ${service.value!.toStringAsFixed(2)}'
+                                  : 'A Combinar',
+                              style: const TextStyle(
+                                color: Color(0xFFc9a56f),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              service.pricingType.displayName,
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
