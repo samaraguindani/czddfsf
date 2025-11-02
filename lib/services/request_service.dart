@@ -11,9 +11,25 @@ class RequestService {
         .select()
         .order('created_at', ascending: false);
 
-    return (response as List)
+    final requests = (response as List)
         .map((json) => Request.fromJson(json))
         .toList();
+    
+    // Ordenar por urgência: urgente > médio > baixo, e depois por data
+    requests.sort((a, b) {
+      final urgencyA = _getUrgencyPriority(a.urgency);
+      final urgencyB = _getUrgencyPriority(b.urgency);
+      
+      // Se as urgências são diferentes, ordenar por urgência
+      if (urgencyA != urgencyB) {
+        return urgencyA.compareTo(urgencyB);
+      }
+      
+      // Se as urgências são iguais, ordenar por data (mais recente primeiro)
+      return b.createdAt.compareTo(a.createdAt);
+    });
+    
+    return requests;
   }
 
   Future<List<Request>> getRequestsByUser(String userId) async {
@@ -59,9 +75,38 @@ class RequestService {
 
     final response = await queryBuilder.order('created_at', ascending: false);
 
-    return (response as List)
+    final requests = (response as List)
         .map((json) => Request.fromJson(json))
         .toList();
+    
+    // Ordenar por urgência: urgente > médio > baixo, e depois por data
+    requests.sort((a, b) {
+      final urgencyA = _getUrgencyPriority(a.urgency);
+      final urgencyB = _getUrgencyPriority(b.urgency);
+      
+      // Se as urgências são diferentes, ordenar por urgência
+      if (urgencyA != urgencyB) {
+        return urgencyA.compareTo(urgencyB);
+      }
+      
+      // Se as urgências são iguais, ordenar por data (mais recente primeiro)
+      return b.createdAt.compareTo(a.createdAt);
+    });
+    
+    return requests;
+  }
+  
+  int _getUrgencyPriority(String urgency) {
+    switch (urgency.toLowerCase()) {
+      case 'urgente':
+        return 1;
+      case 'médio':
+        return 2;
+      case 'baixo':
+        return 3;
+      default:
+        return 4;
+    }
   }
 
   Future<Request> createRequest(Request request) async {
