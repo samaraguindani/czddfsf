@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../providers/auth_provider.dart';
-import '../models/location.dart';
-import '../services/location_service.dart';
 import '../widgets/common_widgets.dart';
 import 'login_screen.dart';
 
@@ -25,19 +25,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _numberController = TextEditingController();
   final _complementController = TextEditingController();
   final _neighborhoodController = TextEditingController();
-
-  List<Estado> _states = [];
-  List<City> _cities = [];
-  Estado? _selectedState;
-  City? _selectedCity;
+  final _cityController = TextEditingController();
+  final _stateController = TextEditingController();
   
   bool _isEditing = false;
   bool _isLoading = false;
+  bool _isLoadingCep = false;
 
   @override
   void initState() {
     super.initState();
-    _loadStates();
     _populateForm();
   }
 
@@ -52,6 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _numberController.dispose();
     _complementController.dispose();
     _neighborhoodController.dispose();
+    _cityController.dispose();
+    _stateController.dispose();
     super.dispose();
   }
 
@@ -69,92 +68,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _numberController.text = user.number ?? '';
       _complementController.text = user.complement ?? '';
       _neighborhoodController.text = user.neighborhood ?? '';
-      
-      // Encontrar estado e cidade se existirem
-      if (user.state != null && user.city != null) {
-        _findStateAndCity(user.state!, user.city!);
-      }
+      _cityController.text = user.city ?? '';
+      _stateController.text = user.state ?? '';
     }
   }
 
-  void _findStateAndCity(String stateCode, String cityName) {
-    // Verificar se há estados carregados
-    if (_states.isEmpty) {
-      print('⚠️ States list is empty, cannot find state');
+  Future<void> _searchCep(String cep) async {
+    // Remove caracteres não numéricos
+    final cleanCep = cep.replaceAll(RegExp(r'[^0-9]'), '');
+    
+    if (cleanCep.length != 8) {
       return;
     }
-    
-    // Encontrar estado
-    try {
-      final state = _states.firstWhere(
-        (s) => s.sigla == stateCode,
-      );
-      
-      setState(() {
-        _selectedState = state;
-      });
-      
-      _loadCities(state.sigla).then((_) {
-        // Encontrar cidade
-        if (_cities.isEmpty) {
-          print('⚠️ Cities list is empty, cannot find city');
-          return;
-        }
-        
-        try {
-          final city = _cities.firstWhere(
-            (c) => c.nome == cityName,
-          );
-          
-          setState(() {
-            _selectedCity = city;
-          });
-        } catch (e) {
-          print('⚠️ City not found: $cityName');
-        }
-      });
-    } catch (e) {
-      print('⚠️ State not found: $stateCode');
-    }
-  }
 
-  Future<void> _loadStates() async {
+    setState(() {
+      _isLoadingCep = true;
+    });
+
     try {
-      final locationService = LocationService();
-      final states = await locationService.getStates();
-      setState(() {
-        _states = states;
-      });
+      final response = await http.get(
+        Uri.parse('https://viacep.com.br/ws/$cleanCep/json/'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        
+        if (data['erro'] != null && data['erro'] == true) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('CEP não encontrado'),
+                backgroundColor: Color(0xFFd68a7a),
+              ),
+            );
+          }
+        } else {
+          setState(() {
+            _streetController.text = data['logradouro'] ?? '';
+            _neighborhoodController.text = data['bairro'] ?? '';
+            _cityController.text = data['localidade'] ?? '';
+            _stateController.text = data['uf'] ?? '';
+          });
+          
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Endereço encontrado!'),
+                backgroundColor: Color(0xFF87a492),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }
+        }
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Erro ao carregar estados: $e'),
+            content: Text('Erro ao buscar CEP: $e'),
             backgroundColor: const Color(0xFFd68a7a),
           ),
         );
       }
-    }
-  }
-
-  Future<void> _loadCities(String stateCode) async {
-    try {
-      final locationService = LocationService();
-      final cities = await locationService.getCitiesByStateCode(stateCode);
-      setState(() {
-        _cities = cities;
-        if (_selectedCity != null && !cities.contains(_selectedCity)) {
-          _selectedCity = null;
-        }
-      });
-    } catch (e) {
+    } finally {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro ao carregar cidades: $e'),
-            backgroundColor: const Color(0xFFd68a7a),
-          ),
-        );
+        setState(() {
+          _isLoadingCep = false;
+        });
       }
     }
   }
@@ -379,11 +359,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           TextFormField(
                             controller: _cepController,
                             enabled: _isEditing,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: 'CEP',
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               hintText: '00000-000',
+                              suffixIcon: _isLoadingCep
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    )
+                                  : _isEditing
+                                      ? IconButton(
+                                          icon: const Icon(Icons.search),
+                                          onPressed: () => _searchCep(_cepController.text),
+                                        )
+                                      : null,
                             ),
+                            onChanged: (value) {
+                              // Busca automática quando o CEP tiver 8 dígitos
+                              final cleanCep = value.replaceAll(RegExp(r'[^0-9]'), '');
+                              if (cleanCep.length == 8) {
+                                _searchCep(value);
+                              }
+                            },
                           ),
                           
                           const SizedBox(height: 16),
@@ -442,51 +446,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           
                           const SizedBox(height: 16),
                           
-              // Estado
-              DropdownButtonFormField<Estado>(
-                value: _selectedState,
-                decoration: const InputDecoration(
-                  labelText: 'Estado',
-                  border: OutlineInputBorder(),
-                ),
-                            items: _states.map((estado) {
-                              return DropdownMenuItem(
-                                value: estado,
-                                child: Text(estado.nome),
-                              );
-                            }).toList(),
-                onChanged: _isEditing ? (value) {
-                  setState(() {
-                    _selectedState = value;
-                    _selectedCity = null;
-                    _cities.clear();
-                  });
-                  if (value != null) {
-                    _loadCities(value.sigla);
-                  }
-                } : null,
+                          // Cidade
+                          TextFormField(
+                            controller: _cityController,
+                            enabled: _isEditing,
+                            decoration: const InputDecoration(
+                              labelText: 'Cidade',
+                              border: OutlineInputBorder(),
+                            ),
                           ),
                           
                           const SizedBox(height: 16),
                           
-                          // Cidade
-              DropdownButtonFormField<City>(
-                value: _selectedCity,
-                decoration: const InputDecoration(
-                  labelText: 'Cidade',
-                  border: OutlineInputBorder(),
-                ),
-                            items: _cities.map((city) {
-                              return DropdownMenuItem(
-                                value: city,
-                                child: Text(city.nome),
-                              );
-                            }).toList(),
-                onChanged: _isEditing ? (value) {
-                  setState(() {
-                    _selectedCity = value;
-                  });
-                } : null,
+                          // Estado
+                          TextFormField(
+                            controller: _stateController,
+                            enabled: _isEditing,
+                            decoration: const InputDecoration(
+                              labelText: 'Estado (UF)',
+                              border: OutlineInputBorder(),
+                              hintText: 'Ex: SP, RJ, MG',
+                            ),
+                            maxLength: 2,
+                            textCapitalization: TextCapitalization.characters,
                           ),
                         ],
                       ),
@@ -603,8 +585,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         number: _numberController.text.trim(),
         complement: _complementController.text.trim(),
         neighborhood: _neighborhoodController.text.trim(),
-        city: _selectedCity?.nome,
-        state: _selectedState?.sigla,
+        city: _cityController.text.trim(),
+        state: _stateController.text.trim().toUpperCase(),
         updatedAt: DateTime.now(),
       );
 
