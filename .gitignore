@@ -48,11 +48,11 @@ app.*.map.json
 .env
 .env.local
 .env.*.local
-lib/services/supabase_config.dart
 *.key
 *.pem
 google-services.json
 GoogleService-Info.plist
+lib/services/supabase_config.dart
 
 # IDE and OS files
 .vscode/
