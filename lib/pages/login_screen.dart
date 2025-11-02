@@ -228,8 +228,15 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passwordController.text,
       );
       
-      // Não fazer redirecionamento manual - deixar o AuthWrapper gerenciar
-      if (!success && mounted) {
+      if (success && mounted) {
+        // Login bem-sucedido, navegar para a Home
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      } else if (!success && mounted) {
+        // Login falhou, mostrar erro
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(authProvider.errorMessage ?? 'Erro ao fazer login'),
@@ -237,7 +244,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         );
       }
-      // Se success = true, o AuthWrapper automaticamente redirecionará para HomeScreen
     }
   }
 }

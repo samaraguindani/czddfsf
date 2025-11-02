@@ -651,23 +651,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showLogoutDialog() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text('Sair da Conta'),
         content: const Text('Tem certeza que deseja sair da sua conta?'),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Cancelar'),
           ),
           TextButton(
             onPressed: () async {
-              Navigator.pop(context);
-              final authProvider = context.read<AuthProvider>();
+              Navigator.pop(dialogContext);
+              
+              // Mostra loading
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+              
+              // Pega o authProvider do contexto original, não do dialog
+              final authProvider = Provider.of<AuthProvider>(context, listen: false);
               await authProvider.signOut();
               
               if (mounted) {
-                Navigator.pushAndRemoveUntil(
-                  context,
+                // Fecha o loading
+                Navigator.pop(context);
+                
+                // Remove todas as rotas e vai para o login
+                Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                     builder: (context) => const LoginScreen(),
                   ),

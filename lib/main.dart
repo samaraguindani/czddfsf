@@ -4,8 +4,7 @@ import 'services/supabase_config.dart';
 import 'providers/auth_provider.dart';
 import 'providers/service_provider.dart';
 import 'providers/request_provider.dart';
-import 'pages/login_screen.dart';
-import 'pages/home_screen.dart';
+import 'pages/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,38 +53,8 @@ class UNIFAZApp extends StatelessWidget {
             ),
           ),
         ),
-        home: const AuthWrapper(),
+        home: const SplashScreen(),
       ),
-    );
-  }
-}
-
-class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
-      builder: (context, authProvider, child) {
-        print('🔄 AuthWrapper rebuild - isLoading: ${authProvider.isLoading}, isAuthenticated: ${authProvider.isAuthenticated}');
-        
-        if (authProvider.isLoading) {
-          print('⏳ Showing loading screen');
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-        
-        if (authProvider.isAuthenticated) {
-          print('✅ User authenticated, showing HomeScreen');
-          return const HomeScreen();
-        }
-        
-        print('❌ User not authenticated, showing LoginScreen');
-        return const LoginScreen();
-      },
     );
   }
 }
