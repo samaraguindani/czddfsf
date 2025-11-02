@@ -8,6 +8,7 @@ import '../widgets/request_card.dart';
 import '../widgets/filter_bottom_sheet.dart';
 import '../widgets/common_widgets.dart';
 import 'request_detail_screen.dart';
+import 'user_profile_screen.dart';
 
 class ExploreRequestsScreen extends StatefulWidget {
   const ExploreRequestsScreen({super.key});
@@ -135,6 +136,16 @@ class _ExploreRequestsScreenState extends State<ExploreRequestsScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => RequestDetailScreen(request: request),
+                            ),
+                          );
+                        },
+                        onViewProfile: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserProfileScreen(
+                                userId: request.userId,
+                              ),
                             ),
                           );
                         },

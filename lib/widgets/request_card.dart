@@ -7,6 +7,7 @@ class RequestCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
+  final VoidCallback? onViewProfile;
   final bool showActions;
 
   const RequestCard({
@@ -15,6 +16,7 @@ class RequestCard extends StatelessWidget {
     this.onTap,
     this.onEdit,
     this.onDelete,
+    this.onViewProfile,
     this.showActions = false,
   });
 
@@ -140,6 +142,36 @@ class RequestCard extends StatelessWidget {
                   ),
                 ],
               ),
+              if (onViewProfile != null) ...[
+                const SizedBox(height: 12),
+                InkWell(
+                  onTap: onViewProfile,
+                  child: Row(
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.user,
+                        size: 14,
+                        color: Colors.indigo[600],
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Ver perfil do solicitante',
+                        style: TextStyle(
+                          color: Colors.indigo[600],
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 12,
+                        color: Colors.indigo[600],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ],
           ),
         ),

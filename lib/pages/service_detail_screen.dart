@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/service.dart';
+import 'user_profile_screen.dart';
 
 class ServiceDetailScreen extends StatelessWidget {
   final Service service;
@@ -247,6 +248,41 @@ class ServiceDetailScreen extends StatelessWidget {
             ),
             
             const SizedBox(height: 24),
+            
+            // Botão ver perfil
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserProfileScreen(
+                        userId: service.userId,
+                      ),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.person),
+                label: const Text(
+                  'Ver Perfil do Prestador',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.indigo[600],
+                  side: BorderSide(color: Colors.indigo[600]!, width: 2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+            
+            const SizedBox(height: 16),
             
             // Botão de contato
             SizedBox(

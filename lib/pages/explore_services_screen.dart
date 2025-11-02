@@ -8,6 +8,7 @@ import '../widgets/service_card.dart';
 import '../widgets/filter_bottom_sheet.dart';
 import '../widgets/common_widgets.dart';
 import 'service_detail_screen.dart';
+import 'user_profile_screen.dart';
 
 class ExploreServicesScreen extends StatefulWidget {
   const ExploreServicesScreen({super.key});
@@ -135,6 +136,16 @@ class _ExploreServicesScreenState extends State<ExploreServicesScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ServiceDetailScreen(service: service),
+                            ),
+                          );
+                        },
+                        onViewProfile: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserProfileScreen(
+                                userId: service.userId,
+                              ),
                             ),
                           );
                         },
