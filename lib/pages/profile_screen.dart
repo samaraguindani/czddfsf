@@ -130,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Erro ao carregar estados: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: const Color(0xFFd68a7a),
           ),
         );
       }
@@ -152,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Erro ao carregar cidades: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: const Color(0xFFd68a7a),
           ),
         );
       }
@@ -165,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Meu Perfil'),
-        backgroundColor: Colors.indigo[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
@@ -220,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 100,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: Colors.indigo[600],
+                              color: const Color(0xFF87a492),
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: const Icon(
@@ -502,7 +502,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: ElevatedButton(
                         onPressed: _isLoading ? null : _saveProfile,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo[600],
+                          backgroundColor: const Color(0xFF87a492),
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -555,7 +555,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: ElevatedButton.icon(
                       onPressed: () => _showLogoutDialog(),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red[600],
+                        backgroundColor: const Color(0xFFd68a7a),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -618,14 +618,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Perfil atualizado com sucesso!'),
-              backgroundColor: Colors.green,
+              backgroundColor: Color(0xFF87a492),
             ),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(authProvider.errorMessage ?? 'Erro ao atualizar perfil'),
-              backgroundColor: Colors.red,
+              backgroundColor: const Color(0xFFd68a7a),
             ),
           );
         }
@@ -635,7 +635,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Erro ao atualizar perfil: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: const Color(0xFFd68a7a),
           ),
         );
       }
@@ -691,7 +691,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
             child: const Text(
               'Sair',
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color: Color(0xFFd68a7a)),
             ),
           ),
         ],

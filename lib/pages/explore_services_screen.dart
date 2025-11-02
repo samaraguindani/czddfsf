@@ -93,7 +93,7 @@ class _ExploreServicesScreenState extends State<ExploreServicesScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Explorar Serviços'),
-        backgroundColor: Colors.blue[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
@@ -184,7 +184,7 @@ class _ExploreServicesScreenState extends State<ExploreServicesScreen> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                prefixIcon: Icon(Icons.map, size: 20, color: Colors.blue[600]),
+                                prefixIcon: const Icon(Icons.map, size: 20, color: Color(0xFF87a492)),
                               ),
                               isExpanded: true,
                               items: [
@@ -258,7 +258,7 @@ class _ExploreServicesScreenState extends State<ExploreServicesScreen> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                    prefixIcon: Icon(Icons.location_city, size: 20, color: Colors.blue[600]),
+                                    prefixIcon: const Icon(Icons.location_city, size: 20, color: Color(0xFF87a492)),
                                   ),
                                   isExpanded: true,
                                   items: [

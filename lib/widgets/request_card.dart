@@ -48,12 +48,12 @@ class RequestCard extends StatelessWidget {
                     IconButton(
                       onPressed: onEdit,
                       icon: const Icon(Icons.edit),
-                      color: Colors.blue,
+                      color: const Color(0xFF87a492),
                     ),
                     IconButton(
                       onPressed: onDelete,
                       icon: const Icon(Icons.delete),
-                      color: Colors.red,
+                      color: const Color(0xFFd68a7a),
                     ),
                   ],
                 ],
@@ -110,15 +110,15 @@ class RequestCard extends StatelessWidget {
                       Icon(
                         FontAwesomeIcons.dollarSign,
                         size: 16,
-                        color: Colors.orange[600],
+                        color: const Color(0xFFc9a56f),
                       ),
                       const SizedBox(width: 8),
                       Text(
                         request.budget != null
                             ? 'R\$ ${request.budget!.toStringAsFixed(2)}'
                             : 'A Combinar',
-                        style: TextStyle(
-                          color: Colors.orange[600],
+                        style: const TextStyle(
+                          color: Color(0xFFc9a56f),
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
@@ -151,13 +151,13 @@ class RequestCard extends StatelessWidget {
                       Icon(
                         FontAwesomeIcons.user,
                         size: 14,
-                        color: Colors.indigo[600],
+                        color: const Color(0xFF5a7a6a),
                       ),
                       const SizedBox(width: 6),
                       Text(
                         'Ver perfil do solicitante',
-                        style: TextStyle(
-                          color: Colors.indigo[600],
+                        style: const TextStyle(
+                          color: Color(0xFF5a7a6a),
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -166,7 +166,7 @@ class RequestCard extends StatelessWidget {
                       Icon(
                         Icons.arrow_forward_ios,
                         size: 12,
-                        color: Colors.indigo[600],
+                        color: const Color(0xFF5a7a6a),
                       ),
                     ],
                   ),
@@ -182,11 +182,11 @@ class RequestCard extends StatelessWidget {
   Color _getUrgencyColor(String urgency) {
     switch (urgency.toLowerCase()) {
       case 'urgente':
-        return Colors.red;
+        return const Color(0xFFd68a7a); // Coral rosado
       case 'médio':
-        return Colors.orange;
+        return const Color(0xFFddb87a); // Amarelo mostarda suave
       case 'baixo':
-        return Colors.green;
+        return const Color(0xFFa8c9a4); // Verde claro
       default:
         return Colors.grey;
     }

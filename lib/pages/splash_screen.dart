@@ -83,18 +83,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.blue[600]!,
-              Colors.purple[600]!,
-            ],
-          ),
-        ),
-        child: Center(
+      backgroundColor: Colors.white,
+      body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -111,7 +101,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       borderRadius: BorderRadius.circular(100),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: const Color(0xFF87a492).withOpacity(0.2),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
@@ -127,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                           return const Icon(
                             Icons.handshake,
                             size: 100,
-                            color: Color(0xFF7FA99B),
+                            color: Color(0xFF87a492),
                           );
                         },
                       ),
@@ -144,7 +134,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: const Text(
                   'UNIFAZ',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF87a492),
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
@@ -159,9 +149,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: const Text(
                   'Unidos Fazemos',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF846aff),
                     fontSize: 18,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -175,7 +165,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   width: 40,
                   height: 40,
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF87a492)),
                     strokeWidth: 3,
                   ),
                 ),
@@ -183,7 +173,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             ],
           ),
         ),
-      ),
     );
   }
 }

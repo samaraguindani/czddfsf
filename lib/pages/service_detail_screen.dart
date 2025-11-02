@@ -17,7 +17,7 @@ class ServiceDetailScreen extends StatelessWidget {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Detalhes do Serviço'),
-        backgroundColor: Colors.blue[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -93,15 +93,15 @@ class ServiceDetailScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.green[50],
+                        color: const Color(0xFFc9a56f).withOpacity(0.15),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.green[200]!),
+                        border: Border.all(color: const Color(0xFFc9a56f)),
                       ),
                       child: Row(
                         children: [
                           Icon(
                             FontAwesomeIcons.dollarSign,
-                            color: Colors.green[600],
+                            color: const Color(0xFFc9a56f),
                             size: 20,
                           ),
                           const SizedBox(width: 8),
@@ -109,8 +109,8 @@ class ServiceDetailScreen extends StatelessWidget {
                             service.value != null
                                 ? 'R\$ ${service.value!.toStringAsFixed(2)}'
                                 : 'A Combinar',
-                            style: TextStyle(
-                              color: Colors.green[600],
+                            style: const TextStyle(
+                              color: Color(0xFFc9a56f),
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
@@ -260,7 +260,7 @@ class ServiceDetailScreen extends StatelessWidget {
                           children: [
                             Icon(
                               FontAwesomeIcons.phone,
-                              color: Colors.blue[600],
+                              color: const Color(0xFF87a492),
                               size: 20,
                             ),
                             const SizedBox(width: 12),
@@ -308,8 +308,8 @@ class ServiceDetailScreen extends StatelessWidget {
                   ),
                 ),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.indigo[600],
-                  side: BorderSide(color: Colors.indigo[600]!, width: 2),
+                  foregroundColor: const Color(0xFF5a7a6a),
+                  side: const BorderSide(color: Color(0xFF5a7a6a), width: 2),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -329,7 +329,7 @@ class ServiceDetailScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Funcionalidade de contato será implementada'),
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Color(0xFF87a492),
                     ),
                   );
                 },
@@ -342,7 +342,7 @@ class ServiceDetailScreen extends StatelessWidget {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue[600],
+                  backgroundColor: const Color(0xFF87a492),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

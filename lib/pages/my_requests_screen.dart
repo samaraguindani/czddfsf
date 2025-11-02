@@ -39,7 +39,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Meus Pedidos'),
-        backgroundColor: Colors.purple[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -125,7 +125,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
             ),
           ).then((_) => _loadMyRequests());
         },
-        backgroundColor: Colors.purple[600],
+        backgroundColor: const Color(0xFF87a492),
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
         label: const Text('Adicionar Pedido'),

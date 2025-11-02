@@ -117,7 +117,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: Text(widget.request == null ? 'Adicionar Pedido' : 'Editar Pedido'),
-        backgroundColor: Colors.purple[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -316,7 +316,7 @@ class _RequestFormScreenState extends State<RequestFormScreen> {
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : _saveRequest,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple[600],
+                    backgroundColor: const Color(0xFF87a492),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),

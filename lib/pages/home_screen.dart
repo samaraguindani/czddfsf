@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _currentIndex = index;
           });
         },
-        selectedItemColor: Colors.blue[600],
+        selectedItemColor: const Color(0xFF87a492),
         unselectedItemColor: Colors.grey[600],
         items: const [
           BottomNavigationBarItem(
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Serviços',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.request_page),
+            icon: Icon(Icons.handshake),
             label: 'Pedidos',
           ),
           BottomNavigationBarItem(
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Meus Serviços',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
+            icon: Icon(Icons.folder_open),
             label: 'Meus Pedidos',
           ),
           BottomNavigationBarItem(
@@ -102,8 +102,8 @@ class HomeContentScreen extends StatelessWidget {
                   return Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.blue[600]!, Colors.purple[600]!],
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF5a7a6a), Color(0xFF87a492)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -204,28 +204,28 @@ class HomeContentScreen extends StatelessWidget {
                     context,
                     'Explorar Serviços',
                     FontAwesomeIcons.search,
-                    Colors.blue,
+                    const Color(0xFF87a492),
                     () => _navigateToScreen(context, 1),
                   ),
                   _buildQuickActionCard(
                     context,
                     'Explorar Pedidos',
-                    FontAwesomeIcons.listCheck,
-                    Colors.green,
+                    FontAwesomeIcons.handshake,
+                    const Color(0xFF87a492),
                     () => _navigateToScreen(context, 2),
                   ),
                   _buildQuickActionCard(
                     context,
                     'Meus Serviços',
                     FontAwesomeIcons.briefcase,
-                    Colors.orange,
+                    const Color(0xFF87a492),
                     () => _navigateToScreen(context, 3),
                   ),
                   _buildQuickActionCard(
                     context,
                     'Meus Pedidos',
-                    FontAwesomeIcons.clipboardList,
-                    Colors.purple,
+                    FontAwesomeIcons.folderOpen,
+                    const Color(0xFF87a492),
                     () => _navigateToScreen(context, 4),
                   ),
                 ],
@@ -352,7 +352,7 @@ class HomeContentScreen extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            color: Colors.blue[600],
+            color: const Color(0xFF87a492),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Center(

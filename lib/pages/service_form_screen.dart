@@ -117,7 +117,7 @@ class _ServiceFormScreenState extends State<ServiceFormScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: Text(widget.service == null ? 'Adicionar Serviço' : 'Editar Serviço'),
-        backgroundColor: Colors.orange[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -313,7 +313,7 @@ class _ServiceFormScreenState extends State<ServiceFormScreen> {
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : _saveService,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange[600],
+                    backgroundColor: const Color(0xFF87a492),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),

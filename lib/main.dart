@@ -30,27 +30,44 @@ class UNIFAZApp extends StatelessWidget {
         title: 'UNIFAZ',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: const Color(0xFF87a492),
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
+            seedColor: const Color(0xFF87a492),
+            secondary: const Color(0xFFc9a56f),
             brightness: Brightness.light,
           ),
           useMaterial3: true,
           appBarTheme: const AppBarTheme(
             centerTitle: true,
             elevation: 0,
+            backgroundColor: Color(0xFF87a492),
+            foregroundColor: Colors.white,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF87a492),
+              foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
           ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Color(0xFF87a492),
+            foregroundColor: Colors.white,
+          ),
           inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
             ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Color(0xFF87a492), width: 2),
+            ),
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            selectedItemColor: Color(0xFF87a492),
+            unselectedItemColor: Colors.grey,
           ),
         ),
         home: const SplashScreen(),

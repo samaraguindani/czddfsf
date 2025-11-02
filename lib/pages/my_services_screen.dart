@@ -39,7 +39,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Meus Serviços'),
-        backgroundColor: Colors.orange[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -125,7 +125,7 @@ class _MyServicesScreenState extends State<MyServicesScreen> {
             ),
           ).then((_) => _loadMyServices());
         },
-        backgroundColor: Colors.orange[600],
+        backgroundColor: const Color(0xFF87a492),
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
         label: const Text('Adicionar Serviço'),

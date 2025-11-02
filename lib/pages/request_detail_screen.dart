@@ -17,7 +17,7 @@ class RequestDetailScreen extends StatelessWidget {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('Detalhes do Pedido'),
-        backgroundColor: Colors.green[600],
+        backgroundColor: const Color(0xFF5a7a6a),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -96,15 +96,15 @@ class RequestDetailScreen extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colors.orange[50],
+                              color: const Color(0xFFc9a56f).withOpacity(0.15),
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.orange[200]!),
+                              border: Border.all(color: const Color(0xFFc9a56f)),
                             ),
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   FontAwesomeIcons.dollarSign,
-                                  color: Colors.orange[600],
+                                  color: Color(0xFFc9a56f),
                                   size: 20,
                                 ),
                                 const SizedBox(width: 8),
@@ -112,8 +112,8 @@ class RequestDetailScreen extends StatelessWidget {
                                   request.budget != null
                                       ? 'R\$ ${request.budget!.toStringAsFixed(2)}'
                                       : 'A Combinar',
-                                  style: TextStyle(
-                                    color: Colors.orange[600],
+                                  style: const TextStyle(
+                                    color: Color(0xFFc9a56f),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -227,7 +227,7 @@ class RequestDetailScreen extends StatelessWidget {
                           children: [
                             Icon(
                               FontAwesomeIcons.clock,
-                              color: Colors.blue[600],
+                              color: const Color(0xFF87a492),
                               size: 20,
                             ),
                             const SizedBox(width: 12),
@@ -282,7 +282,7 @@ class RequestDetailScreen extends StatelessWidget {
                           children: [
                             Icon(
                               FontAwesomeIcons.phone,
-                              color: Colors.green[600],
+                              color: const Color(0xFF87a492),
                               size: 20,
                             ),
                             const SizedBox(width: 12),
@@ -330,8 +330,8 @@ class RequestDetailScreen extends StatelessWidget {
                   ),
                 ),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.indigo[600],
-                  side: BorderSide(color: Colors.indigo[600]!, width: 2),
+                  foregroundColor: const Color(0xFF5a7a6a),
+                  side: const BorderSide(color: Color(0xFF5a7a6a), width: 2),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -351,7 +351,7 @@ class RequestDetailScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Funcionalidade de contato será implementada'),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFF87a492),
                     ),
                   );
                 },
@@ -364,7 +364,7 @@ class RequestDetailScreen extends StatelessWidget {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green[600],
+                  backgroundColor: const Color(0xFF87a492),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -412,11 +412,11 @@ class RequestDetailScreen extends StatelessWidget {
   Color _getUrgencyColor(String urgency) {
     switch (urgency.toLowerCase()) {
       case 'urgente':
-        return Colors.red;
+        return const Color(0xFFd68a7a); // Coral rosado
       case 'médio':
-        return Colors.orange;
+        return const Color(0xFFddb87a); // Amarelo mostarda suave
       case 'baixo':
-        return Colors.green;
+        return const Color(0xFFa8c9a4); // Verde claro
       default:
         return Colors.grey;
     }
