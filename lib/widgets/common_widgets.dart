@@ -13,7 +13,7 @@ class LoadingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SpinKitFadingCircle(
-            color: Colors.blue,
+            color: Color(0xFF87a492),
             size: 50.0,
           ),
           if (message != null) ...[

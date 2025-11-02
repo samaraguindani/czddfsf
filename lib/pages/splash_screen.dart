@@ -126,36 +126,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 ),
               ),
               
-              const SizedBox(height: 40),
-              
-              // Nome do app
-              FadeTransition(
-                opacity: _fadeAnimation,
-                child: const Text(
-                  'UNIFAZ',
-                  style: TextStyle(
-                    color: Color(0xFF87a492),
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                  ),
-                ),
-              ),
-              
-              const SizedBox(height: 8),
-              
-              FadeTransition(
-                opacity: _fadeAnimation,
-                child: const Text(
-                  'Unidos Fazemos',
-                  style: TextStyle(
-                    color: Color(0xFF846aff),
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              
               const SizedBox(height: 60),
               
               // Indicador de carregamento

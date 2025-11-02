@@ -41,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF87a492)),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -51,13 +51,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Logo
+              Center(
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF87a492).withOpacity(0.2),
+                        blurRadius: 15,
+                        spreadRadius: 3,
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(
+                            Icons.handshake,
+                            color: Color(0xFF87a492),
+                            size: 50,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 24),
+              
               // Título
               const Text(
                 'Criar Conta',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Color(0xFF87a492),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -65,9 +103,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 8),
               
               Text(
-                'Preencha os dados abaixo para criar sua conta',
+                'Preencha os dados abaixo',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.grey[600],
                 ),
                 textAlign: TextAlign.center,
@@ -230,7 +268,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: ElevatedButton(
                             onPressed: () => _signUp(context),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue[600],
+                              backgroundColor: const Color(0xFF87a492),
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -296,8 +334,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (success && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Conta criada com sucesso! Verifique seu e-mail.'),
-            backgroundColor: Colors.green,
+            content: Text('Conta criada com sucesso!'),
+            backgroundColor: Color(0xFF87a492),
           ),
         );
         Navigator.pushReplacement(
@@ -310,7 +348,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(authProvider.errorMessage ?? 'Erro ao criar conta'),
-            backgroundColor: Colors.red,
+            backgroundColor: const Color(0xFFd68a7a),
           ),
         );
       }

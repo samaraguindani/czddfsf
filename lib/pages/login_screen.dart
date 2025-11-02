@@ -42,41 +42,52 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 children: [
                   Container(
-                    width: 100,
-                    height: 100,
+                    width: 120,
+                    height: 120,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF87a492),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(
-                      Icons.handshake,
                       color: Colors.white,
-                      size: 50,
+                      borderRadius: BorderRadius.circular(60),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF87a492).withOpacity(0.2),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(60),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(
+                              Icons.handshake,
+                              color: Color(0xFF87a492),
+                              size: 60,
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
                   const Text(
-                    'UNIFAZ',
+                    'Unidos Fazemos',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF87a492),
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Unidos Fazemos',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Conectando pessoas através de serviços',
+                    'Conecte. Colabore. Faça acontecer.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[500],
+                      color: Colors.grey[600],
                     ),
                     textAlign: TextAlign.center,
                   ),
